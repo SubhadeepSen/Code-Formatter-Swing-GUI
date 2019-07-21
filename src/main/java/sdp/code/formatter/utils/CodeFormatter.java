@@ -66,7 +66,7 @@ public final class CodeFormatter {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < length - 1; i++) {
 			if (!lines[i].equals(NO_STRING)) {
-				sb.append(lines[i]).append(SPACE);
+				sb.append(lines[i].replaceAll("\t", "")).append(SPACE);
 			}
 		}
 		sb.append(lines[length - 1]);
