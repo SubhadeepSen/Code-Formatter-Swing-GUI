@@ -1,7 +1,9 @@
 package sdp.code.formatter.window;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -60,32 +62,41 @@ public class ApplicationWindow {
 		JButton fileBrowseButton = new JButton("Browse");
 
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addGroup(groupLayout.createSequentialGroup().addContainerGap().addComponent(
-										leftScrollPane, GroupLayout.PREFERRED_SIZE, 480, GroupLayout.PREFERRED_SIZE))
-								.addGroup(groupLayout.createSequentialGroup().addGap(35).addComponent(rdbtnXml)
-										.addGap(10).addComponent(rdbtnJson).addGap(10).addComponent(rdbtnSingleLine)
-										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)
-										.addComponent(fileBrowseButton)))
-						.addPreferredGap(ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-						.addComponent(rightScrollPane, GroupLayout.PREFERRED_SIZE, 477, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap()));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(rdbtnXml, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-								.addComponent(rdbtnJson, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
-								.addComponent(rdbtnSingleLine, GroupLayout.PREFERRED_SIZE, 31,
-										GroupLayout.PREFERRED_SIZE)
-								.addComponent(fileBrowseButton))
-						.addPreferredGap(ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(rightScrollPane, Alignment.TRAILING).addComponent(leftScrollPane,
-										Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE))
-						.addContainerGap()));
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(leftScrollPane, GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(35)
+							.addComponent(rdbtnXml)
+							.addGap(10)
+							.addComponent(rdbtnJson)
+							.addGap(10)
+							.addComponent(rdbtnSingleLine)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(fileBrowseButton)))
+					.addGap(31)
+					.addComponent(rightScrollPane, GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(rdbtnXml, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+						.addComponent(rdbtnJson, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+						.addComponent(rdbtnSingleLine, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+						.addComponent(fileBrowseButton))
+					.addGap(7)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(rightScrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
+						.addComponent(leftScrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE))
+					.addContainerGap())
+		);
 
 		JTextArea rightTextArea = new JTextArea();
 		rightTextArea.setTabSize(4);
@@ -112,9 +123,11 @@ public class ApplicationWindow {
 	private void createFrame() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
-		frame.setResizable(false);
 		frame.setTitle(WINDOW_TITLE);
-		frame.setSize(1024, 576);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		int width = (int) ((screenSize.getWidth() * 90)/100);
+		int height = (int) ((screenSize.getHeight() * 90)/100);
+		frame.setSize(width, height);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 	}
